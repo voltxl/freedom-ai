@@ -47,7 +47,7 @@ PROMPT_FILE = "system-prompt.txt"  # 🧩 Local system prompt file
 DEFAULT_API_KEY = "<your-api-key>"
 DEFAULT_BASE_URL = "https://openrouter.ai/api/v1"
 DEFAULT_MODEL = "tngtech/deepseek-r1t-chimera:free"
-SITE_URL = "https://github.com/michannna/deepseek-openrouter-cli"
+SITE_URL = "https://github.com/voltxl/freedom-ai"
 SITE_NAME = "FreedomAI CLI"
 SUPPORTED_LANGUAGES = ["English", "Indonesian", "Spanish", "Arabic", "Thai", "Portuguese"]
 
