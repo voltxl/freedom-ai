@@ -1,8 +1,8 @@
-#  🐋 Deepseek - OpenRouter Edition
+#  🐋 FreedomAI - OpenRouter Edition
 
-**Deepseek CLI** is a sleek command-line interface (CLI) for interacting with LLMs via OpenRouter API. It supports multiple models, automatic language detection, and customizable settings — all in a terminal-friendly format.
+**FreedomAI CLI** is a sleek command-line interface (CLI) for interacting with LLMs via OpenRouter API. It supports multiple models, automatic language detection, and customizable settings — all in a terminal-friendly format.
 
-> ⚡ Lightweight. Powerful. Fully terminal-based. code credit to: [@00x0kafyy](https://github.com/00x0kafyy) made by [@michannna] (https://github.com/michannna)
+> ⚡ Lightweight. Powerful. Fully terminal-based. code credit to: [@00x0kafyy](https://github.com/00x0kafyy) made by [@krisko111] (https://github.com/krisko111)
 
 ---
 
@@ -14,7 +14,7 @@
 - 💬 Interactive chat session with typing effect
 - 🎨 Stylish CLI UI with colors and banners
 - 🔧 Easy configuration of API key and model
-- 💾 Config auto-saved in `deepseek_config.json`
+- 💾 Config auto-saved in `system_config.json`
 
 ---
 
@@ -31,8 +31,8 @@
 Clone the repo:
 
 ```bash
-git clone https://github.com/michannna/deepseek-openrouter-cli
-cd deepseek-openrouter-cli
+git clone https://github.com/krisko111/freedom-ai
+cd freedom-ai
 python3 ai.py
 ```
 
@@ -72,7 +72,7 @@ python3 ai.py
 
 Start chatting:
 ```
-[Deepseek]~[#]> What's the capital of Indonesia?
+[freedom]~[#]> What's the capital of United States?
 ```
 
 ## 🧪 Custom Models
@@ -84,11 +84,7 @@ Example:
 01-ai/Yi-34B-Chat
 meta-llama/llama-3-8b-instruct:nitro
 ```
-
-## 👨‍💻 Code Credit
-
-GitHub: @00x0kafyy
-
-Telegram: t.me/xsocietyforums
-
-Project URL: https://github.com/00x0kafyy/worm-gpt
+## Warning
+```
+This AI is built for do all things, and not restricted, so use it for good things!
+```
