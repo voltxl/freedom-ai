@@ -6,7 +6,6 @@ import json
 import requests
 from datetime import datetime
 
-# Check and install missing dependencies
 try:
     import pyfiglet
 except ImportError:
@@ -24,8 +23,7 @@ try:
 except ImportError:
     os.system("pip install qrcode[pil] --quiet")
     import qrcode
-
-# Color configuration
+    
 class colors:
     black = "\033[0;30m"
     red = "\033[0;31m"
@@ -46,9 +44,8 @@ class colors:
     reset = "\033[0m"
     bold = "\033[1m"
 
-# Configuration
 CONFIG_FILE = "system_config.json"
-PROMPT_FILE = "system-prompt.txt"  # 🧩 Local system prompt file
+PROMPT_FILE = "system-prompt.txt" 
 DEFAULT_API_KEY = "<your-api-key>"
 DEFAULT_BASE_URL = "https://openrouter.ai/api/v1"
 DEFAULT_MODEL = "tngtech/deepseek-r1t-chimera:free"
