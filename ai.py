@@ -19,6 +19,12 @@ except ImportError:
     os.system('pip install langdetect --quiet')
     from langdetect import detect
 
+try:
+    import qrcode
+except ImportError:
+    os.system("pip install qrcode[pil] --quiet")
+    import qrcode
+
 # Color configuration
 class colors:
     black = "\033[0;30m"
@@ -42,7 +48,6 @@ class colors:
 
 # Configuration
 CONFIG_FILE = "system_config.json"
-CHAT_HISTORY_FILE = "chat_history.json"
 PROMPT_FILE = "system-prompt.txt"  # 🧩 Local system prompt file
 DEFAULT_API_KEY = "<your-api-key>"
 DEFAULT_BASE_URL = "https://openrouter.ai/api/v1"
@@ -50,6 +55,18 @@ DEFAULT_MODEL = "tngtech/deepseek-r1t-chimera:free"
 SITE_URL = "https://github.com/voltxl/freedom-ai"
 SITE_NAME = "FreedomAI CLI"
 SUPPORTED_LANGUAGES = ["English", "Indonesian", "Spanish", "Arabic", "Thai", "Portuguese"]
+
+inf = CONFIG_FILE, PROMPT_FILE, DEFAULT_API_KEY, DEFAULT_BASE_URL, DEFAULT_MODEL, SITE_URL, SITE_NAME
+file_path = "system_info.png"
+
+if os.path.exists(file_path):
+    os.remove(file_path)
+
+qr = qrcode.QRCode()
+qr.add_data(inf)
+
+img = qr.make_image()
+img.save(file_path)
 
 def load_config():
     if os.path.exists(CONFIG_FILE):
@@ -69,15 +86,6 @@ def save_config(config):
     with open(CONFIG_FILE, "w") as f:
         json.dump(config, f, indent=2)
 
-def load_history():
-    if not os.path.exists(CHAT_HISTORY_FILE):
-        return []
-    try:
-        with open(CHAT_HISTORY_FILE, "r") as f:
-            return json.load(f)
-    except:
-        return []
-
 def banner():
     try:
         figlet = pyfiglet.Figlet(font="big")
@@ -87,6 +95,7 @@ def banner():
     print(f"{colors.bright_black}Artificial Intelligence CLI-based{colors.reset}")
     print(f"{colors.bright_white}OpenRouter API | {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}{colors.reset}")
     print(f"{colors.bright_black}Artificial Intelligence CLI {colors.bright_white}Made by voltx <3 {colors.reset}")
+    print(f"{colors.bright_white}[Message: Thanks for trying our program!]{colors.reset}")
     print(f"{colors.bright_white}{SITE_URL}{colors.reset}")
 
 def banner_ex():
@@ -168,14 +177,26 @@ def set_api_key():
     banner()
     
     print(f"{colors.bright_black}[ API Key Configuration ]{colors.reset}")
+    print(f"{colors.bright_white}[Message] The api key will be generated automatically as qrcode with png format")
     print(f"{colors.bright_white}Current key: {colors.green}{'*' * len(config['api_key']) if config['api_key'] else 'Not set'}{colors.reset}")
     
-    new_key = input(f"\n{colors.black}Enter new API key: {colors.reset}")
+    new_key = input(f"\n{colors.bright_black}Enter new API key: {colors.reset}")
     if new_key.strip():
         config["api_key"] = new_key.strip()
         save_config(config)
         print(f"{colors.bright_green}API key updated{colors.reset}")
         time.sleep(1)
+
+        file_path = "api_key.png"
+
+        if os.path.exists(file_path):
+            os.remove(file_path)
+
+        qr = qrcode.QRCode()
+        qr.add_data(new_key)
+
+        img = qr.make_image()
+        img.save(file_path)
 
 def get_jailbreak_prompt():
     if not os.path.exists(PROMPT_FILE):
@@ -281,7 +302,6 @@ def call_api_ex(user_input_ex):
 
 def chat_session():
     config = load_config()
-    history = load_history()
     clear_screen()
     banner()
     
