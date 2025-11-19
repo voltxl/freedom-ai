@@ -6,24 +6,6 @@ import json
 import requests
 from datetime import datetime
 
-try:
-    import pyfiglet
-except ImportError:
-    os.system('pip install pyfiglet --quiet')
-    import pyfiglet
-
-try:
-    from langdetect import detect
-except ImportError:
-    os.system('pip install langdetect --quiet')
-    from langdetect import detect
-
-try:
-    import qrcode
-except ImportError:
-    os.system("pip install qrcode[pil] --quiet")
-    import qrcode
-    
 class colors:
     black = "\033[0;30m"
     red = "\033[0;31m"
@@ -44,26 +26,46 @@ class colors:
     reset = "\033[0m"
     bold = "\033[1m"
 
+def clear_screen():
+    os.system("cls" if platform.system() == "Windows" else "clear")
+
+try:
+    import pyfiglet
+except ImportError:
+    print(f"{colors.red}[error] pyfiglet module is not installed!{colors.reset}")
+    print(f"{colors.red}[process] Installing pyfiglet...{colors.reset}")
+    os.system('pip install pyfiglet --quiet')
+    print(f"{colors.bright_green}[process] Pyfiglet is installed!{colors.reset}")
+    time.sleep(3)
+    import pyfiglet
+
+try:
+    from langdetect import detect
+except ImportError:
+    print(f"{colors.red}\n[error] langdetect module is not installed!{colors.reset}")
+    print(f"{colors.red}[process] Installing langdetect...{colors.reset}")
+    os.system('pip install langdetect --quiet')
+    print(f"{colors.bright_green}[process] langdetect is installed!{colors.reset}")
+    time.sleep(3)
+    from langdetect import detect
+
+try:
+    import qrcode
+except ImportError:
+    print(f"{colors.red}\n[error] qrcode module is not installed!{colors.reset}")
+    print(f"{colors.red}[process] Installing qrcode...{colors.reset}")
+    os.system("pip install qrcode[pil] --quiet")
+    print(f"{colors.bright_green}[process] qrcode is installed!{colors.reset}")
+    import qrcode
+
 CONFIG_FILE = "system_config.json"
-PROMPT_FILE = "system-prompt.txt" 
-DEFAULT_API_KEY = "<your-api-key>"
+PROMPT_FILE = "system-prompt.txt"  
+DEFAULT_API_KEY = "YOUR_API_KEY"
 DEFAULT_BASE_URL = "https://openrouter.ai/api/v1"
 DEFAULT_MODEL = "tngtech/deepseek-r1t-chimera:free"
 SITE_URL = "https://github.com/voltxl/freedom-ai"
 SITE_NAME = "FreedomAI CLI"
 SUPPORTED_LANGUAGES = ["English", "Indonesian", "Spanish", "Arabic", "Thai", "Portuguese"]
-
-inf = CONFIG_FILE, PROMPT_FILE, DEFAULT_API_KEY, DEFAULT_BASE_URL, DEFAULT_MODEL, SITE_URL, SITE_NAME
-file_path = "system_info.png"
-
-if os.path.exists(file_path):
-    os.remove(file_path)
-
-qr = qrcode.QRCode()
-qr.add_data(inf)
-
-img = qr.make_image()
-img.save(file_path)
 
 def load_config():
     if os.path.exists(CONFIG_FILE):
@@ -89,21 +91,9 @@ def banner():
         print(f"{colors.white}{figlet.renderText('Freedom')}{colors.reset}")
     except:
         print(f"{colors.bright_black}FreedomAI{colors.reset}")
-    print(f"{colors.bright_black}Artificial Intelligence CLI-based{colors.reset}")
     print(f"{colors.bright_white}OpenRouter API | {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}{colors.reset}")
     print(f"{colors.bright_black}Artificial Intelligence CLI {colors.bright_white}Made by voltx <3 {colors.reset}")
-    print(f"{colors.bright_white}[Message: Thanks for trying our program!]{colors.reset}")
     print(f"{colors.bright_white}{SITE_URL}{colors.reset}")
-
-def banner_ex():
-    try:
-        figlet = pyfiglet.Figlet(font="big")
-        print(f"{colors.white}{figlet.renderText('experiment')}{colors.reset}")
-    except:
-        print(f"{colors.white}experiment-01{colors.reset}")
-        print("You're in experimental mode!")
-def clear_screen():
-    os.system("cls" if platform.system() == "Windows" else "clear")
 
 def typing_print(text, delay=0.02):
     for char in text:
@@ -300,7 +290,6 @@ def call_api_ex(user_input_ex):
 def chat_session():
     config = load_config()
     clear_screen()
-    banner()
     
     print(f"{colors.bright_white}[ Chat Session ]{colors.reset}")
     print(f"{colors.bright_black}Model: {colors.white}{config['model']}{colors.reset}")
@@ -335,53 +324,6 @@ def chat_session():
         except Exception as e:
             print(f"\n{colors.red}Error: {e}{colors.reset}")
 
-def chat_session_experiment():
-    config = load_config()
-    clear_screen()
-    banner_ex()
-    print(f"{colors.white}{CONFIG_FILE}{colors.reset}")
-    print(f"{colors.white}{PROMPT_FILE}{colors.reset}")
-    print(f"{colors.white}{DEFAULT_API_KEY}{colors.reset}")
-    print(f"{colors.white}{DEFAULT_BASE_URL}{colors.reset}")
-    print(f"{colors.white}{DEFAULT_MODEL}{colors.reset}")
-    
-    print(f"{colors.bright_white}[ Chat Session ]{colors.reset}")
-    print(f"{colors.bright_black}Model: {colors.white}{config['model']}{colors.reset}")
-    print(f"{colors.bright_black}Type 'menu' to return or 'exit' to quit{colors.reset}")
-
-    while True:
-        try:
-            user_input_ex = input(f"\n{colors.bright_black}[Freedom-experiment]~[#]> {colors.reset}")
-            
-            if not user_input_ex.strip():
-                continue
-                
-            if user_input_ex.lower() == "exit":
-                print(f"{colors.bright_red}Exiting...{colors.reset}")
-                sys.exit(0)
-            elif user_input_ex.lower() == "menu":
-                return
-            elif user_input_ex.lower() == "clear":
-                clear_screen()
-                banner()
-                print(f"{colors.bright_white}[ Chat Session ]{colors.reset}")
-                continue
-            elif user_input_ex.lower() == "neofetch":
-                os.system("neofetch")
-                continue
-            
-            response = call_api_ex(user_input_ex)
-            if response:
-                print(f"\n{colors.bright_black}Response:{colors.reset}\n{colors.white}", end="")
-                typing_print(response)
-                
-        except KeyboardInterrupt:
-            print(f"\n{colors.red}Interrupted!{colors.reset}")
-            return
-        except Exception as e:
-            print(f"\n{colors.red}Error: {e}{colors.reset}")
-
-
 def main_menu():
     while True:
         config = load_config()
@@ -393,8 +335,7 @@ def main_menu():
         print(f"{colors.white}[2]. Model: {colors.bright_black}{config['model']}{colors.reset}")
         print(f"{colors.white}[3]. Set API Key{colors.reset}")
         print(f"{colors.white}[4]. Start Chat{colors.reset}")
-        print(f"{colors.white}[5]. Start Chat (experimental){colors.reset}")
-        print(f"{colors.white}[6]. Exit{colors.reset}")
+        print(f"{colors.white}[5]. Exit{colors.reset}")
         
         try:
             choice = input(f"\n{colors.bright_black}[>] Select (1-6): {colors.reset}")
@@ -408,8 +349,6 @@ def main_menu():
             elif choice == "4":
                 chat_session()
             elif choice == "5":
-                chat_session_experiment()
-            elif choice == "6":
                 print(f"{colors.bright_red}Exiting...{colors.reset}")
                 sys.exit(0)
             else:
