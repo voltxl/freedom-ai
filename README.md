@@ -18,6 +18,9 @@
 
 ---
 
+## Guide
+- ([Installation](https://github.com/voltxl/freedom-ai?tab=readme-ov-file#%EF%B8%8F-installation))
+
 ## 📦 Requirements
 
 - Python 3.6+
