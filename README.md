@@ -2,7 +2,7 @@
 
 **FreedomAI CLI** is a sleek command-line interface (CLI) for interacting with LLMs via OpenRouter API. It supports multiple models, automatic language detection, and customizable settings — all in a terminal-friendly format.
 
-> ⚡ Lightweight. Powerful. Fully terminal-based. code credit to: [@00x0kafyy](https://github.com/00x0kafyy) made by [@voltxl] (https://github.com/voltxl)
+> ⚡ Lightweight. Powerful. Fully terminal-based. made by [@voltxl] (https://github.com/voltxl)
 
 ---
 
