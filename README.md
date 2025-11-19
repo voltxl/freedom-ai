@@ -86,5 +86,5 @@ meta-llama/llama-3-8b-instruct:nitro
 ```
 ## Warning
 ```
-This AI is built for do all things, and not restricted, so use it for good things!
+This AI is built for do anything, so don't use it for...
 ```
