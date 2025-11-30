@@ -56,6 +56,7 @@ except ImportError:
     print(f"{colors.red}[process] Installing qrcode...{colors.reset}")
     os.system("pip install qrcode[pil] --quiet")
     print(f"{colors.bright_green}[process] qrcode is installed!{colors.reset}")
+    time.sleep(3)
     import qrcode
 
 CONFIG_FILE = "system_config.json"
