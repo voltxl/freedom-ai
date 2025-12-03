@@ -8,6 +8,7 @@
 
 ## 🚀 Features
 
+- 🧠 AI memory saved in `chat_memory.json`
 - 🔗 OpenRouter API integration
 - 🌍 Auto language detection (via `langdetect`)
 - 🗣️ Multi-language support: English, Indonesian, Spanish, Arabic, Thai, Portuguese
